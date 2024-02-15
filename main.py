@@ -8,26 +8,16 @@ from aiogram.filters import Filter
 
 
 
-from aiogram import Bot, Dispatcher, Router, F
+from aiogram import Bot, Dispatcher, Router, F, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message 
 from aiogram.utils.markdown import hbold
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-FLAG_DEBUG = True
 
 dp = Dispatcher()
 router = Router()
-
-
-# Создание клавиатуры
-main_kb = InlineKeyboardMarkup(inline_keyboard=[
-[InlineKeyboardButton(text = "📝FAQ", callback_data="faq"),
-InlineKeyboardButton(text = "‼️event‼️", callback_data="event"),
-InlineKeyboardButton(text = "👥profile", callback_data="prof")
-]
-],)
 
 
 
@@ -36,12 +26,58 @@ async def command_start_handler(message: Message) -> None:
     """
     This handler receives messages with `/start` command
     """
+    kb = [
+        [types.KeyboardButton(text="Тест ")],
+        [types.KeyboardButton(text="Творчество🎩")],
+        [types.KeyboardButton(text="События🌠")],
+        [types.KeyboardButton(text="Помощь🛟")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
 
-    await message.answer(f"{config['init_message']}, {message.from_user.first_name}😊")
+    await message.answer(f"{config['init_message']}, {message.from_user.first_name}😊", reply_markup=keyboard)
 
-@dp.message(F.text, Command("menu"))
+@dp.message(F.text == "Меню")
 async def any_message(message: Message):
-    await message.answer("test", reply_markup=main_kb)
+    kb = [
+        [types.KeyboardButton(text="Творчество🎩")],
+        [types.KeyboardButton(text="События🌠")],
+        [types.KeyboardButton(text="Помощь🛟")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Возвращение в стартовое меню.", reply_markup=keyboard)
+
+
+@dp.message(F.text == "Помощь🛟")
+async def any_message(message: Message):
+    kb = [
+        [types.KeyboardButton(text="Меню")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Помощь сработала", reply_markup=keyboard)
+
+
+
+@dp.message(F.text == "Творчество🎩")
+async def any_message(message: Message):
+    kb = [
+        [types.KeyboardButton(text="Творчество🎩")],
+        [types.KeyboardButton(text="События🌠")],
+        [types.KeyboardButton(text="Помощь🛟")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Помощь сработала", reply_markup=keyboard)
+
+
+
+@dp.message(F.text == "События🌠")
+async def any_message(message: Message):
+    kb = [
+        [types.KeyboardButton(text="Творчество🎩")],
+        [types.KeyboardButton(text="События🌠")],
+        [types.KeyboardButton(text="Помощь🛟")]
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Помощь сработала", reply_markup=keyboard)
 
 
 
