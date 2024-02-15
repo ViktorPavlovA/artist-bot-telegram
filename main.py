@@ -27,24 +27,35 @@ async def command_start_handler(message: Message) -> None:
     This handler receives messages with `/start` command
     """
     kb = [
-        [types.KeyboardButton(text="Тест ")],
-        [types.KeyboardButton(text="Творчество🎩")],
-        [types.KeyboardButton(text="События🌠")],
-        [types.KeyboardButton(text="Помощь🛟")]
+        [types.KeyboardButton(text="Для себя")],
+        [types.KeyboardButton(text="В подарок")],
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
 
     await message.answer(f"{config['init_message']}, {message.from_user.first_name}😊", reply_markup=keyboard)
+    await message.answer("Для кого выбираете картину?")
 
-@dp.message(F.text == "Меню")
+@dp.message(F.text == "Для себя")
 async def any_message(message: Message):
     kb = [
-        [types.KeyboardButton(text="Творчество🎩")],
-        [types.KeyboardButton(text="События🌠")],
-        [types.KeyboardButton(text="Помощь🛟")]
+        [types.KeyboardButton(text="Пейзаж")],
+        [types.KeyboardButton(text="Животные")],
+        [types.KeyboardButton(text="Абстрактное искусство")],
+        [types.KeyboardButton(text="Натюрморт")],
+        [types.KeyboardButton(text="Цветы")]
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("Возвращение в стартовое меню.", reply_markup=keyboard)
+    await message.answer("Какие предпочтения в теме картины?", reply_markup=keyboard)
+
+
+
+
+
+
+
+
+
+
 
 
 @dp.message(F.text == "Помощь🛟")
