@@ -27,68 +27,76 @@ async def command_start_handler(message: Message) -> None:
     This handler receives messages with `/start` command
     """
     kb = [
-        [types.KeyboardButton(text="Для себя")],
-        [types.KeyboardButton(text="В подарок")],
+        [types.KeyboardButton(text="Для себя👤")],
+        [types.KeyboardButton(text="В подарок🎁")],
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
 
     await message.answer(f"{config['init_message']}, {message.from_user.first_name}😊", reply_markup=keyboard)
-    await message.answer("Для кого выбираете картину?")
+    await message.answer("Для кого выбираете картину?", reply_markup=keyboard)
 
-@dp.message(F.text == "Для себя")
+@dp.message(F.text == "Меню🔙")
+async def command_start_handler(message: Message) -> None:
+    """
+    This handler receives messages with `/start` command
+    """
+    kb = [
+        [types.KeyboardButton(text="Для себя👤")],
+        [types.KeyboardButton(text="В подарок🎁")],
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Для кого выбираете картину?", reply_markup=keyboard)
+
+
+
+# Первый уровень
+@dp.message(F.text == "Для себя👤")
 async def any_message(message: Message):
     kb = [
-        [types.KeyboardButton(text="Пейзаж")],
-        [types.KeyboardButton(text="Животные")],
-        [types.KeyboardButton(text="Абстрактное искусство")],
-        [types.KeyboardButton(text="Натюрморт")],
-        [types.KeyboardButton(text="Цветы")]
+        [types.KeyboardButton(text="Пейзаж🏞")],
+        [types.KeyboardButton(text="Животные🦁")],
+        [types.KeyboardButton(text="Абстрактное искусство🔳")],
+        [types.KeyboardButton(text="Натюрморт🖼")],
+        [types.KeyboardButton(text="Цветы🌷")],
+        [types.KeyboardButton(text="Меню🔙")]
+
+    ]
+    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
+    await message.answer("Какие предпочтения в теме картины?", reply_markup=keyboard)
+
+
+@dp.message(F.text == "В подарок🎁")
+async def any_message(message: Message):
+    kb = [
+        [types.KeyboardButton(text="Пейзаж🏞")],
+        [types.KeyboardButton(text="Животные🦁")],
+        [types.KeyboardButton(text="Абстрактное искусство🔳")],
+        [types.KeyboardButton(text="Натюрморт🖼")],
+        [types.KeyboardButton(text="Цветы🌷")],
+        [types.KeyboardButton(text="Меню🔙")]
+        
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
     await message.answer("Какие предпочтения в теме картины?", reply_markup=keyboard)
 
 
 
-
-
-
-
-
-
-
-
-
-@dp.message(F.text == "Помощь🛟")
+@dp.message(F.text == "В подарок🎁")
 async def any_message(message: Message):
     kb = [
-        [types.KeyboardButton(text="Меню")]
+        [types.KeyboardButton(text="Пейзаж🏞")],
+        [types.KeyboardButton(text="Животные🦁")],
+        [types.KeyboardButton(text="Абстрактное искусство🔳")],
+        [types.KeyboardButton(text="Натюрморт🖼")],
+        [types.KeyboardButton(text="Цветы🌷")],
+        [types.KeyboardButton(text="Меню🔙")]
+        
     ]
     keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("Помощь сработала", reply_markup=keyboard)
+    await message.answer("Какие предпочтения в теме картины?", reply_markup=keyboard)
 
 
 
-@dp.message(F.text == "Творчество🎩")
-async def any_message(message: Message):
-    kb = [
-        [types.KeyboardButton(text="Творчество🎩")],
-        [types.KeyboardButton(text="События🌠")],
-        [types.KeyboardButton(text="Помощь🛟")]
-    ]
-    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("Помощь сработала", reply_markup=keyboard)
-
-
-
-@dp.message(F.text == "События🌠")
-async def any_message(message: Message):
-    kb = [
-        [types.KeyboardButton(text="Творчество🎩")],
-        [types.KeyboardButton(text="События🌠")],
-        [types.KeyboardButton(text="Помощь🛟")]
-    ]
-    keyboard = types.ReplyKeyboardMarkup(keyboard=kb)
-    await message.answer("Помощь сработала", reply_markup=keyboard)
 
 
 
